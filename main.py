@@ -1,38 +1,45 @@
 
-def PrintFile(filename):
-    # file = open(filename, 'r')
-    # print (file.read())
-    with open(filename, 'r') as file:
-        print (file.read())
-    return True
+# Connect4 Program
+
+Board = [['-', '-', '-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-', '-', '-']]
+
+colCtr = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
 
 
-scores = []
-ScoreDB = open("scoredb.csv", 'w')
+def DisplayBoard():
+    for item in Board:
+        print (item)
+    return (True)
+
+
+# def UpdateCell(tblrow, cellid, value):
+#     tblrow[cellid] = value
+#     return(tblrow)
+
+
+DisplayBoard()
 
 while (True):
+    #Row = int(input("Enter row: "))
+    Col = int(input("Enter col: "))
+    Symbol = input("Enter symbol: ")
 
-    for i in range(3):
-        score = input(f" Item {i} - Input your score: ")
-        scores.append(score)
-        ScoreDB.write(score + ',')
-
-    ScoreDB.write('\n')
-    print ('Your scores are \n', scores, '!')
-
-    proceed = input("Do you want to add new set? Y/N :")
-
-    if proceed == 'N':
+    if Symbol == 'Z':
         break
 
-ScoreDB.close()
+    # print (f'Row {Row} and Col {Col}') #Debugging
+    # cell = Board[Row]
+    # cell[Col] = Symbol
 
-ScoreDB = open('scoredb.csv', 'a')
-ScoreDB.write('100,200,300')
-ScoreDB.close()
+    Level = colCtr[Col]
+    Row = Board[5 - Level]
+    Row[Col] = Symbol
 
+    Level += 1
+    colCtr[Col] = Level
 
-print ('DONE')
+    print (colCtr)
 
-print('=' * 10)
-PrintFile('scoredb.csv')
+    #Board[Row] = UpdateCell(Board[Row], Col, Symbol)
+
+    DisplayBoard()
